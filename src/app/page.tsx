@@ -23,6 +23,7 @@ import {
 import Navbar from "@/components/Navbar"
 import { useQuery } from "@tanstack/react-query";
 import $axios from "@/lib/axios.instance"
+import Footer from "@/components/Footer"
 
 interface Bike {
   _id: string;
@@ -672,6 +673,7 @@ const formatDriveUrl = (url: string): string =>
           </div>
         </section>
       </div>
+      <Footer />
     </>
   )
 }

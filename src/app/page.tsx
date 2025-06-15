@@ -183,91 +183,91 @@ const formatDriveUrl = (url: string): string =>
       <Navbar/>
       <div className="min-h-screen">
         {/* Hero Section */}
-        <section className="relative bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 text-white overflow-hidden min-h-screen flex items-center">
+        <section className="relative bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 text-white overflow-hidden min-h-[90vh] flex items-center">
           <div className="absolute inset-0 bg-black/30" />
           <div className="absolute inset-0">
-            <div className="absolute top-20 left-10 w-72 h-72 bg-purple-500/20 rounded-full blur-3xl animate-float" />
+            <div className="absolute top-20 left-10 w-48 sm:w-72 h-48 sm:h-72 bg-purple-500/20 rounded-full blur-3xl animate-float" />
             <div
-              className="absolute bottom-20 right-10 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl animate-float"
+              className="absolute bottom-20 right-10 w-64 sm:w-96 h-64 sm:h-96 bg-blue-500/20 rounded-full blur-3xl animate-float"
               style={{ animationDelay: "1s" }}
             />
             <div
-              className="absolute top-1/2 left-1/2 w-64 h-64 bg-cyan-500/20 rounded-full blur-3xl animate-float"
+              className="absolute top-1/2 left-1/2 w-48 sm:w-64 h-48 sm:h-64 bg-cyan-500/20 rounded-full blur-3xl animate-float"
               style={{ animationDelay: "2s" }}
             />
           </div>
 
-          <div className="relative container mx-auto px-4 py-20">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="relative container mx-auto px-4 sm:px-6 py-12 sm:py-20">
+            <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 items-center">
               <motion.div
                 initial={{ opacity: 0, x: -50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8 }}
-                className="space-y-8"
+                className="space-y-6 sm:space-y-8"
               >
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.2 }}
                 >
-                  <Badge className="bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-semibold px-4 py-2 text-sm mb-6">
+                  <Badge className="bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-semibold px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm mb-4 sm:mb-6">
                     🔥 #1 Trusted Dealer in Karnali Pradesh
                   </Badge>
                 </motion.div>
 
-                <h1 className="text-5xl lg:text-7xl font-black leading-tight">
+                <h1 className="text-4xl sm:text-5xl lg:text-7xl font-black leading-tight">
                   Find Your Perfect
                   <span className="block bg-gradient-to-r from-yellow-400 via-pink-500 to-cyan-400 bg-clip-text text-transparent animate-pulse">
                     Dream Ride
                   </span>
                 </h1>
 
-                <p className="text-xl lg:text-2xl text-blue-100 max-w-lg leading-relaxed">
+                <p className="text-lg sm:text-xl lg:text-2xl text-blue-100 max-w-lg leading-relaxed">
                   Premium quality pre-owned bikes and scooters in Surkhet.
                   <span className="text-yellow-400 font-semibold"> Trusted by 2500+ happy customers</span> across
                   Karnali Pradesh.
                 </p>
 
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                  <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="w-full sm:w-auto">
                     <Button
                       asChild
                       size="lg"
-                      className="bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-black font-bold text-lg px-8 py-4 shadow-2xl hover:shadow-yellow-500/25"
+                      className="w-full bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-black font-bold text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 shadow-2xl hover:shadow-yellow-500/25"
                     >
                       <Link href="/bikes">
-                        <Zap className="w-5 h-5 mr-2" />
+                        <Zap className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
                         Browse All Vehicles
                       </Link>
                     </Button>
                   </motion.div>
-                  <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                  <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="w-full sm:w-auto">
                     <Button
                       asChild
                       variant="outline"
                       size="lg"
-                      className="border-2 border-white text-white hover:bg-white hover:text-purple-900 font-semibold text-lg px-8 py-4 backdrop-blur-sm"
+                      className="w-full border-2 border-white text-white hover:bg-white hover:text-purple-900 font-semibold text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 backdrop-blur-sm"
                     >
                       <Link href="/contact">
-                        <Heart className="w-5 h-5 mr-2" />
+                        <Heart className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
                         Contact Us
                       </Link>
                     </Button>
                   </motion.div>
                 </div>
 
-                <div className="flex flex-wrap items-center gap-6 pt-6">
+                <div className="flex flex-wrap items-center gap-4 sm:gap-6 pt-4 sm:pt-6">
                   <div className="flex items-center gap-2">
-                    <MapPin className="w-6 h-6 text-yellow-400" />
-                    <span className="text-lg font-medium">Surkhet, Karnali Pradesh</span>
+                    <MapPin className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-400" />
+                    <span className="text-base sm:text-lg font-medium">Surkhet, Karnali Pradesh</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <div className="flex">
                       {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
+                        <Star key={i} className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400 fill-current" />
                       ))}
                     </div>
-                    <span className="text-lg font-medium">4.9/5 Rating (500+ Reviews)</span>
+                    <span className="text-base sm:text-lg font-medium">4.9/5 Rating (500+ Reviews)</span>
                   </div>
                 </div>
               </motion.div>
@@ -276,7 +276,7 @@ const formatDriveUrl = (url: string): string =>
                 initial={{ opacity: 0, x: 50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
-                className="relative"
+                className="relative hidden lg:block"
               >
                 <div className="relative">
                   <Image
@@ -287,7 +287,7 @@ const formatDriveUrl = (url: string): string =>
                     className="rounded-2xl shadow-2xl hover-lift"
                     priority
                   />
-                  <div className="absolute -top-4 -right-4 bg-gradient-to-r from-green-400 to-emerald-500 text-white px-6 py-3 rounded-full font-bold text-lg shadow-lg animate-bounce">
+                  <div className="absolute -top-4 -right-4 bg-gradient-to-r from-green-400 to-emerald-500 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full font-bold text-base sm:text-lg shadow-lg animate-bounce">
                     Special Offer!
                   </div>
                 </div>
@@ -297,9 +297,9 @@ const formatDriveUrl = (url: string): string =>
         </section>
 
         {/* Stats Section */}
-        <section className="py-16 bg-gradient-to-r from-gray-50 to-blue-50">
-          <div className="container mx-auto px-4">
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <section className="py-12 sm:py-16 bg-gradient-to-r from-gray-50 to-blue-50">
+          <div className="container mx-auto px-4 sm:px-6">
+            <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8">
               {stats.map((stat, index) => (
                 <motion.div
                   key={index}
@@ -309,14 +309,14 @@ const formatDriveUrl = (url: string): string =>
                   viewport={{ once: true }}
                   whileHover={{ scale: 1.05 }}
                 >
-                  <Card className="text-center p-8 hover-lift bg-white/80 backdrop-blur-sm border-0 shadow-xl">
+                  <Card className="text-center p-4 sm:p-8 hover-lift bg-white/80 backdrop-blur-sm border-0 shadow-xl">
                     <div
-                      className={`bg-gradient-to-br from-purple-100 to-blue-100 w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6`}
+                      className={`bg-gradient-to-br from-purple-100 to-blue-100 w-16 h-16 sm:w-20 sm:h-20 rounded-2xl flex items-center justify-center mx-auto mb-4 sm:mb-6`}
                     >
-                      <stat.icon className={`w-10 h-10 ${stat.color}`} />
+                      <stat.icon className={`w-8 h-8 sm:w-10 sm:h-10 ${stat.color}`} />
                     </div>
-                    <div className="text-4xl font-black text-gray-900 mb-3">{stat.value}</div>
-                    <div className="text-gray-600 font-semibold text-lg">{stat.label}</div>
+                    <div className="text-2xl sm:text-4xl font-black text-gray-900 mb-2 sm:mb-3">{stat.value}</div>
+                    <div className="text-sm sm:text-lg text-gray-600 font-semibold">{stat.label}</div>
                   </Card>
                 </motion.div>
               ))}
@@ -325,36 +325,36 @@ const formatDriveUrl = (url: string): string =>
         </section>
 
         {/* Featured Vehicles */}
-        <section className="py-20 bg-white">
-          <div className="container mx-auto px-4">
+        <section className="py-12 sm:py-20 bg-white">
+          <div className="container mx-auto px-4 sm:px-6">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
-              className="text-center mb-16"
+              className="text-center mb-8 sm:mb-16"
             >
-              <Badge className="bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold px-6 py-2 text-lg mb-6">
+              <Badge className="bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold px-4 sm:px-6 py-1.5 sm:py-2 text-sm sm:text-lg mb-4 sm:mb-6">
                 ⭐ Featured Collection
               </Badge>
-              <h2 className="text-4xl lg:text-6xl font-black text-gray-900 mb-6">
+              <h2 className="text-3xl sm:text-4xl lg:text-6xl font-black text-gray-900 mb-4 sm:mb-6">
                 Premium <span className="text-gradient">Vehicles</span>
               </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              <p className="text-base sm:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
                 Handpicked selection of the finest second-hand bikes and scooters, each thoroughly inspected and
                 certified for your peace of mind.
               </p>
             </motion.div>
 
             {isLoading ? (
-              <div className="flex items-center justify-center py-20">
+              <div className="flex items-center justify-center py-12 sm:py-20">
                 <div className="text-center">
-                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600 mx-auto"></div>
+                  <div className="animate-spin rounded-full h-10 w-10 sm:h-12 sm:w-12 border-b-2 border-purple-600 mx-auto"></div>
                   <p className="mt-4 text-gray-600">Loading bikes...</p>
                 </div>
               </div>
             ) : (
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
                 {displayBikes.map((bike, index) => (
                   <motion.div
                     key={bike._id}
@@ -371,15 +371,15 @@ const formatDriveUrl = (url: string): string =>
                           alt={`${bike.name} ${bike.year} - ${bike.condition} condition second-hand ${bike.type.toLowerCase()} for sale in Surkhet`}
                           width={400}
                           height={300}
-                          className="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-500"
+                          className="w-full h-48 sm:h-56 object-cover group-hover:scale-105 transition-transform duration-500"
                         />
-                        <Badge className="absolute top-4 right-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold">
+                        <Badge className="absolute top-3 sm:top-4 right-3 sm:right-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold text-xs sm:text-sm">
                           {bike.type}
                         </Badge>
-                        <Badge className="absolute top-4 left-4 bg-gradient-to-r from-green-500 to-emerald-500 text-white font-bold">
+                        <Badge className="absolute top-3 sm:top-4 left-3 sm:left-4 bg-gradient-to-r from-green-500 to-emerald-500 text-white font-bold text-xs sm:text-sm">
                           {bike.discount} OFF
                         </Badge>
-                        <div className="absolute bottom-4 left-4 right-4">
+                        <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 right-3 sm:right-4">
                           <div className="flex flex-wrap gap-1">
                             {bike.features?.slice(0, 2).map((feature, idx) => (
                               <Badge key={idx} variant="secondary" className="text-xs bg-white/90 text-gray-700">
@@ -389,23 +389,23 @@ const formatDriveUrl = (url: string): string =>
                           </div>
                         </div>
                       </div>
-                      <CardHeader className="pb-3">
-                        <CardTitle className="flex justify-between items-start text-xl">
+                      <CardHeader className="pb-2 sm:pb-3">
+                        <CardTitle className="flex justify-between items-start text-lg sm:text-xl">
                           <span className="font-bold">{bike.name}</span>
                           <div className="text-right">
-                            <div className="text-2xl font-black text-green-600">{bike.price}</div>
-                            <div className="text-sm text-gray-500 line-through">{bike.originalPrice}</div>
+                            <div className="text-xl sm:text-2xl font-black text-green-600">{bike.price}</div>
+                            <div className="text-xs sm:text-sm text-gray-500 line-through">{bike.originalPrice}</div>
                           </div>
                         </CardTitle>
-                        <CardDescription className="text-base">
-                          <div className="flex items-center gap-4 text-gray-600">
+                        <CardDescription className="text-sm sm:text-base">
+                          <div className="flex items-center gap-2 sm:gap-4 text-gray-600">
                             <span className="font-semibold">{bike.year}</span>
                             <span>•</span>
                             <span className="font-semibold">{bike.mileage}</span>
                             <span>•</span>
                             <Badge
                               variant="outline"
-                              className={`${
+                              className={`text-xs sm:text-sm ${
                                 bike.condition === "Excellent"
                                   ? "border-green-500 text-green-700"
                                   : "border-yellow-500 text-yellow-700"
@@ -418,17 +418,17 @@ const formatDriveUrl = (url: string): string =>
                       </CardHeader>
                       <CardContent className="pt-0">
                         <div className="space-y-3">
-                          <div className="flex items-center gap-2">
+                          <div className="flex flex-wrap items-center gap-2">
                             {bike.features?.map((feature, idx) => (
                               <div key={idx} className="flex items-center gap-1">
-                                <CheckCircle className="w-4 h-4 text-green-500" />
-                                <span className="text-sm text-gray-600">{feature}</span>
+                                <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-green-500" />
+                                <span className="text-xs sm:text-sm text-gray-600">{feature}</span>
                               </div>
                             ))}
                           </div>
                           <Button
                             asChild
-                            className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold text-lg py-3"
+                            className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold text-sm sm:text-lg py-2 sm:py-3"
                           >
                             <Link href={`/bikes/${bike._id}`}>View Details</Link>
                           </Button>
@@ -440,13 +440,13 @@ const formatDriveUrl = (url: string): string =>
               </div>
             )}
 
-            <div className="text-center mt-16">
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <div className="text-center mt-8 sm:mt-16">
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="w-full sm:w-auto mx-auto">
                 <Button
                   asChild
                   variant="outline"
                   size="lg"
-                  className="border-2 border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white font-bold text-lg px-8 py-4"
+                  className="w-full sm:w-auto border-2 border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white font-bold text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4"
                 >
                   <Link href="/bikes">View All 200+ Vehicles</Link>
                 </Button>
@@ -456,28 +456,28 @@ const formatDriveUrl = (url: string): string =>
         </section>
 
         {/* Services Section */}
-        <section className="py-20 bg-gradient-to-br from-purple-50 via-blue-50 to-cyan-50">
-          <div className="container mx-auto px-4">
+        <section className="py-12 sm:py-20 bg-gradient-to-br from-purple-50 via-blue-50 to-cyan-50">
+          <div className="container mx-auto px-4 sm:px-6">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
-              className="text-center mb-16"
+              className="text-center mb-8 sm:mb-16"
             >
-              <Badge className="bg-gradient-to-r from-green-600 to-emerald-600 text-white font-semibold px-6 py-2 text-lg mb-6">
+              <Badge className="bg-gradient-to-r from-green-600 to-emerald-600 text-white font-semibold px-4 sm:px-6 py-1.5 sm:py-2 text-sm sm:text-lg mb-4 sm:mb-6">
                 🛡️ Our Promise
               </Badge>
-              <h2 className="text-4xl lg:text-6xl font-black text-gray-900 mb-6">
+              <h2 className="text-3xl sm:text-4xl lg:text-6xl font-black text-gray-900 mb-4 sm:mb-6">
                 Why Choose <span className="text-gradient">Us?</span>
               </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              <p className="text-base sm:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
                 We provide unmatched service quality and customer satisfaction that sets us apart from other dealers in
                 the region.
               </p>
             </motion.div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8">
               {services.map((service, index) => (
                 <motion.div
                   key={index}
@@ -487,14 +487,14 @@ const formatDriveUrl = (url: string): string =>
                   viewport={{ once: true }}
                   whileHover={{ y: -10 }}
                 >
-                  <Card className="text-center p-8 hover-lift bg-white/80 backdrop-blur-sm border-0 shadow-xl group h-full">
+                  <Card className="text-center p-6 sm:p-8 hover-lift bg-white/80 backdrop-blur-sm border-0 shadow-xl group h-full">
                     <div
-                      className={`bg-gradient-to-br ${service.color} w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300`}
+                      className={`bg-gradient-to-br ${service.color} w-16 h-16 sm:w-20 sm:h-20 rounded-2xl flex items-center justify-center mx-auto mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300`}
                     >
-                      <service.icon className="w-10 h-10 text-white" />
+                      <service.icon className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
                     </div>
-                    <h3 className="text-2xl font-bold mb-4 text-gray-900">{service.title}</h3>
-                    <p className="text-gray-600 leading-relaxed">{service.description}</p>
+                    <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-gray-900">{service.title}</h3>
+                    <p className="text-sm sm:text-base text-gray-600 leading-relaxed">{service.description}</p>
                   </Card>
                 </motion.div>
               ))}
@@ -503,22 +503,22 @@ const formatDriveUrl = (url: string): string =>
         </section>
 
         {/* Brands Section */}
-        <section className="py-16 bg-white">
-          <div className="container mx-auto px-4">
+        <section className="py-12 sm:py-16 bg-white">
+          <div className="container mx-auto px-4 sm:px-6">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
-              className="text-center mb-12"
+              className="text-center mb-8 sm:mb-12"
             >
-              <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 sm:mb-4">
                 Trusted <span className="text-gradient">Brands</span>
               </h2>
-              <p className="text-gray-600 max-w-2xl mx-auto">We deal with all major motorcycle and scooter brands</p>
+              <p className="text-sm sm:text-base text-gray-600 max-w-2xl mx-auto">We deal with all major motorcycle and scooter brands</p>
             </motion.div>
 
-            <div className="grid grid-cols-3 md:grid-cols-6 gap-8 items-center">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 sm:gap-8 items-center">
               {brands.map((brand, index) => (
                 <motion.div
                   key={index}
@@ -543,31 +543,31 @@ const formatDriveUrl = (url: string): string =>
         </section>
 
         {/* Testimonials */}
-        <section className="py-20 bg-gradient-to-br from-gray-900 via-purple-900 to-blue-900 text-white">
-          <div className="container mx-auto px-4">
+        <section className="py-12 sm:py-20 bg-gradient-to-br from-gray-900 via-purple-900 to-blue-900 text-white">
+          <div className="container mx-auto px-4 sm:px-6">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
-              className="text-center mb-16"
+              className="text-center mb-8 sm:mb-16"
             >
-              <Badge className="bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-semibold px-6 py-2 text-lg mb-6">
+              <Badge className="bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-semibold px-4 sm:px-6 py-1.5 sm:py-2 text-sm sm:text-lg mb-4 sm:mb-6">
                 💬 Customer Stories
               </Badge>
-              <h2 className="text-4xl lg:text-6xl font-black mb-6">
+              <h2 className="text-3xl sm:text-4xl lg:text-6xl font-black mb-4 sm:mb-6">
                 What Our{" "}
                 <span className="bg-gradient-to-r from-yellow-400 to-pink-400 bg-clip-text text-transparent">
                   Customers
                 </span>{" "}
                 Say
               </h2>
-              <p className="text-xl text-blue-100 max-w-3xl mx-auto leading-relaxed">
+              <p className="text-base sm:text-xl text-blue-100 max-w-3xl mx-auto leading-relaxed">
                 Don&apos;t just take our word for it. Here&apos;s what our satisfied customers have to say about their experience.
               </p>
             </motion.div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
               {testimonials.map((testimonial, index) => (
                 <motion.div
                   key={index}
@@ -577,26 +577,26 @@ const formatDriveUrl = (url: string): string =>
                   viewport={{ once: true }}
                   whileHover={{ y: -5 }}
                 >
-                  <Card className="p-8 bg-white/10 backdrop-blur-sm border-white/20 text-white hover-lift">
-                    <div className="flex items-center gap-4 mb-6">
+                  <Card className="p-6 sm:p-8 bg-white/10 backdrop-blur-sm border-white/20 text-white hover-lift">
+                    <div className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
                       <Image
                         src={testimonial.image || "/placeholder.svg"}
                         alt={`${testimonial.name} - Happy customer from ${testimonial.location}`}
                         width={60}
                         height={60}
-                        className="rounded-full"
+                        className="rounded-full w-12 h-12 sm:w-14 sm:h-14"
                       />
                       <div>
-                        <h4 className="font-bold text-lg">{testimonial.name}</h4>
-                        <p className="text-blue-200">{testimonial.location}</p>
+                        <h4 className="font-bold text-base sm:text-lg">{testimonial.name}</h4>
+                        <p className="text-sm sm:text-base text-blue-200">{testimonial.location}</p>
                       </div>
                     </div>
-                    <div className="flex mb-4">
+                    <div className="flex mb-3 sm:mb-4">
                       {[...Array(testimonial.rating)].map((_, i) => (
-                        <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
+                        <Star key={i} className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400 fill-current" />
                       ))}
                     </div>
-                    <p className="text-blue-100 leading-relaxed italic">&quot;{testimonial.comment}&quot;</p>
+                    <p className="text-sm sm:text-base text-blue-100 leading-relaxed italic">&quot;{testimonial.comment}&quot;</p>
                   </Card>
                 </motion.div>
               ))}
@@ -605,16 +605,16 @@ const formatDriveUrl = (url: string): string =>
         </section>
 
         {/* CTA Section */}
-        <section className="py-20 bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-500 text-white relative overflow-hidden">
+        <section className="py-12 sm:py-20 bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-500 text-white relative overflow-hidden">
           <div className="absolute inset-0">
-            <div className="absolute top-10 left-10 w-64 h-64 bg-white/10 rounded-full blur-3xl animate-float" />
+            <div className="absolute top-10 left-10 w-48 sm:w-64 h-48 sm:h-64 bg-white/10 rounded-full blur-3xl animate-float" />
             <div
-              className="absolute bottom-10 right-10 w-80 h-80 bg-white/10 rounded-full blur-3xl animate-float"
+              className="absolute bottom-10 right-10 w-64 sm:w-80 h-64 sm:h-80 bg-white/10 rounded-full blur-3xl animate-float"
               style={{ animationDelay: "1s" }}
             />
           </div>
 
-          <div className="container mx-auto px-4 text-center relative">
+          <div className="container mx-auto px-4 sm:px-6 text-center relative">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -622,51 +622,51 @@ const formatDriveUrl = (url: string): string =>
               viewport={{ once: true }}
               className="max-w-4xl mx-auto"
             >
-              <Badge className="bg-white/20 text-white font-semibold px-6 py-2 text-lg mb-8">🚀 Ready to Ride?</Badge>
-              <h2 className="text-4xl lg:text-6xl font-black mb-8">
+              <Badge className="bg-white/20 text-white font-semibold px-4 sm:px-6 py-1.5 sm:py-2 text-sm sm:text-lg mb-6 sm:mb-8">🚀 Ready to Ride?</Badge>
+              <h2 className="text-3xl sm:text-4xl lg:text-6xl font-black mb-6 sm:mb-8">
                 Find Your Perfect Ride <span className="text-yellow-300">Today!</span>
               </h2>
-              <p className="text-xl lg:text-2xl text-blue-100 mb-12 leading-relaxed">
+              <p className="text-base sm:text-xl lg:text-2xl text-blue-100 mb-8 sm:mb-12 leading-relaxed">
                 Visit our showroom in Surkhet or contact us for personalized assistance.
                 <span className="text-yellow-300 font-semibold"> Special financing options available!</span>
               </p>
-              <div className="flex flex-col sm:flex-row gap-6 justify-center">
-                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center">
+                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="w-full sm:w-auto">
                   <Button
                     asChild
                     size="lg"
-                    className="bg-white text-purple-600 hover:bg-gray-100 font-bold text-xl px-10 py-6 shadow-2xl"
+                    className="w-full bg-white text-purple-600 hover:bg-gray-100 font-bold text-base sm:text-xl px-6 sm:px-10 py-4 sm:py-6 shadow-2xl"
                   >
                     <Link href="/contact">
-                      <MapPin className="w-6 h-6 mr-3" />
+                      <MapPin className="w-5 h-5 sm:w-6 sm:h-6 mr-2 sm:mr-3" />
                       Visit Our Showroom
                     </Link>
                   </Button>
                 </motion.div>
-                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="w-full sm:w-auto">
                   <Button
                     asChild
                     variant="outline"
                     size="lg"
-                    className="border-2 border-white text-white hover:bg-white hover:text-purple-600 font-bold text-xl px-10 py-6 backdrop-blur-sm"
+                    className="w-full border-2 border-white text-white hover:bg-white hover:text-purple-600 font-bold text-base sm:text-xl px-6 sm:px-10 py-4 sm:py-6 backdrop-blur-sm"
                   >
                     <Link href="tel:+977-123-456-789">📞 Call: +977-123-456-789</Link>
                   </Button>
                 </motion.div>
               </div>
 
-              <div className="mt-12 grid md:grid-cols-3 gap-8 text-center">
+              <div className="mt-8 sm:mt-12 grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 text-center">
                 <div>
-                  <div className="text-3xl font-bold mb-2">Open Daily</div>
-                  <div className="text-blue-100">9:00 AM - 6:00 PM</div>
+                  <div className="text-2xl sm:text-3xl font-bold mb-2">Open Daily</div>
+                  <div className="text-sm sm:text-base text-blue-100">9:00 AM - 6:00 PM</div>
                 </div>
                 <div>
-                  <div className="text-3xl font-bold mb-2">Free Inspection</div>
-                  <div className="text-blue-100">For All Vehicles</div>
+                  <div className="text-2xl sm:text-3xl font-bold mb-2">Free Inspection</div>
+                  <div className="text-sm sm:text-base text-blue-100">For All Vehicles</div>
                 </div>
                 <div>
-                  <div className="text-3xl font-bold mb-2">Easy Financing</div>
-                  <div className="text-blue-100">Low Interest Rates</div>
+                  <div className="text-2xl sm:text-3xl font-bold mb-2">Easy Financing</div>
+                  <div className="text-sm sm:text-base text-blue-100">Low Interest Rates</div>
                 </div>
               </div>
             </motion.div>

@@ -76,7 +76,7 @@ const bikeDetailsSchema = new Schema(
       required: true,
     },
     fileId: {
-      type: String, // optional Google Drive fileId if needed
+      type: [String], 
     },
   },
   {

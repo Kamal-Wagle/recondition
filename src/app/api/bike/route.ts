@@ -73,87 +73,53 @@ export async function POST(req: Request) {
     await connectDB();
     const formData = await req.formData();
 
-    // Required fields
-    const name = formData.get("name") as string;
-    const price = formData.get("price") as string;
-    const year = formData.get("year") as string;
-    const mileage = formData.get("mileage") as string;
-    const condition = formData.get("condition") as string;
-    const type = formData.get("type") as string;
-    const brand = formData.get("brand") as string;
-    const engine = formData.get("engine") as string;
-    const fuelType = formData.get("fuelType") as string;
-    const transmission = formData.get("transmission") as string;
-    const color = formData.get("color") as string;
-    const owners = formData.get("owners") as string;
-    const insurance = formData.get("insurance") as string;
-    const registration = formData.get("registration") as string;
-    const description = formData.get("description") as string;
+    const fields = [
+      "name", "price", "year", "mileage", "condition", "type", "brand",
+      "engine", "fuelType", "transmission", "color", "owners",
+      "insurance", "registration", "description",
+    ];
 
-    const features = JSON.parse(formData.get("features") as string); // array
-    const specifications = JSON.parse(formData.get("specifications") as string); // object
-
-    const imageFiles = formData.getAll("images") as File[];
-    if (
-      !name ||
-      !price ||
-      !year ||
-      !mileage ||
-      !condition ||
-      !type ||
-      !brand ||
-      !engine ||
-      !fuelType ||
-      !transmission ||
-      !color ||
-      !owners ||
-      !insurance ||
-      !registration ||
-      !description ||
-      !features ||
-      !specifications ||
-      imageFiles.length === 0
-    ) {
-      return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
+    const data: Record<string, string> = {};
+    for (const field of fields) {
+      const value = formData.get(field);
+      if (!value) {
+        return NextResponse.json({ error: `Missing required field: ${field}` }, { status: 400 });
+      }
+      data[field] = value as string;
     }
 
-    // Upload images to Drive
+    const features = JSON.parse(formData.get("features") as string);
+    const specifications = JSON.parse(formData.get("specifications") as string);
+    const imageFiles = formData.getAll("images") as File[];
+
+    if (!Array.isArray(features) || typeof specifications !== "object" || imageFiles.length === 0) {
+      return NextResponse.json({ error: "Invalid features/specifications/images" }, { status: 400 });
+    }
+
     const uploadedImages = await Promise.all(
       imageFiles.map((file) => uploadFileToDrive(folderId as string, file))
     );
 
-    const imageUrls = uploadedImages.map((img) => img.link);
-    const fileId = uploadedImages[0]?.id || "";
+    const imageUrls = uploadedImages.map((img) => img.link.replace("/view?", "/preview?"));
+    const fileIds = uploadedImages.map((img) => img.id);
 
     const newBike = await BikeDetails.create({
-      name,
-      price,
-      year,
-      mileage,
-      condition,
-      type,
-      brand,
-      engine,
-      fuelType,
-      transmission,
-      color,
-      owners,
-      insurance,
-      registration,
-      description,
+      ...data,
       features,
       specifications,
       images: imageUrls,
-      fileId,
+      fileId: fileIds, // now storing multiple
     });
 
     return NextResponse.json({ message: "Bike uploaded", bike: newBike }, { status: 200 });
+
   } catch (error) {
     console.error("Upload error:", error);
     const errorMessage = error instanceof Error ? error.message : "Internal Server Error";
     return NextResponse.json({ error: errorMessage }, { status: 500 });
   }
 }
+
 
 // GET: Fetch all bikes
 export async function GET() {

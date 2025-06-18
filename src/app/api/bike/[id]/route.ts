@@ -34,34 +34,47 @@ const authenticateGoogle = () => {
 
 interface FileUpload {
   name: string;
-  mimeType?: string;
+  mimeType: string;
   content: string;
 }
 
-const uploadFileToDrive = async (folderId: string, file: FileUpload) => {
+
+const uploadFileToDrive = async (
+  folderId: string,
+  file: FileUpload
+): Promise<{ id: string; link: string; name: string; mimeType: string }> => {
   const auth = authenticateGoogle();
   const drive = google.drive({ version: "v3", auth });
 
   const buffer = Buffer.from(file.content, "base64");
+  const stream = Readable.from(buffer);
 
-  const response = await drive.files.create({
-    requestBody: { name: file.name, parents: [folderId] },
-    media: { mimeType: file.mimeType || "application/octet-stream", body: Readable.from(buffer) },
+  const createRes = await drive.files.create({
+    requestBody: {
+      name: file.name,
+      parents: [folderId],
+      mimeType: file.mimeType,
+    },
+    media: {
+      mimeType: file.mimeType,
+      body: stream,
+    },
     fields: "id",
   });
 
-  const fileLink = await drive.files.get({
-    fileId: response.data.id!,
+  const getRes = await drive.files.get({
+    fileId: createRes.data.id!,
     fields: "webViewLink",
   });
 
   return {
-    id: response.data.id!,
-    link: fileLink.data.webViewLink || "",
+    id: createRes.data.id!,
+    link: getRes.data.webViewLink || "",
     name: file.name,
-    mimeType: file.mimeType || "application/octet-stream",
+    mimeType: file.mimeType,
   };
 };
+
 
 // GET
 export async function GET(request: NextRequest) {
@@ -94,19 +107,37 @@ export async function DELETE(request: NextRequest) {
 
     const drive = google.drive({ version: "v3", auth: authenticateGoogle() });
 
-    // Delete associated file(s)
-    if (bike.fileId) {
-      await drive.files.delete({ fileId: bike.fileId });
+    // ✅ Delete multiple files
+    if (Array.isArray(bike.fileId) && bike.fileId.length > 0) {
+      for (const fileId of bike.fileId) {
+        try {
+          await drive.files.delete({ fileId });
+          console.log("✅ Deleted file:", fileId);
+        } catch (err: unknown) {
+          const error = err as { status?: number; message?: string };
+          if (error?.status === 404) {
+            console.warn("⚠️ File already deleted or not found:", fileId);
+          } else {
+            console.error("❌ Failed to delete file:", fileId, error.message);
+          }
+        }
+      }
+    } else {
+      console.log("ℹ️ No fileId array found or it's empty.");
     }
 
     const deletedBike = await BikeDetails.findByIdAndDelete(id);
     return NextResponse.json({ message: "Bike deleted successfully", success: true, deletedBike });
   } catch (error) {
-    return NextResponse.json({ error: error instanceof Error ? error.message : "Internal error" }, { status: 500 });
+    console.error("❌ Delete API error:", error);
+    return NextResponse.json(
+      { error: error instanceof Error ? error.message : "Internal error" },
+      { status: 500 }
+    );
   }
 }
 
-// PUT
+
 export async function PUT(request: NextRequest) {
   try {
     const id = request.nextUrl.pathname.split("/").pop();
@@ -136,7 +167,7 @@ export async function PUT(request: NextRequest) {
       description,
       features,
       specifications,
-      file, // optional
+      files, // this must be base64 or file-like content
     } = body;
 
     await connectDB();
@@ -149,23 +180,38 @@ export async function PUT(request: NextRequest) {
     const folderId = process.env.GDRIVE_Bike_FOLDER_ID!;
     const drive = google.drive({ version: "v3", auth: authenticateGoogle() });
 
-    let fileData = {};
-    if (file) {
-      try {
-        if (existingBike.fileId) {
-          await drive.files.delete({ fileId: existingBike.fileId });
+    // 🧹 Delete old files only if new files are actually provided
+    const newImageUrls: string[] = [];
+    const newFileIds: string[] = [];
+
+    if (Array.isArray(files) && files.length > 0) {
+      if (Array.isArray(existingBike.fileId) && existingBike.fileId.length > 0) {
+        for (const fileId of existingBike.fileId) {
+          try {
+            await drive.files.delete({ fileId });
+            console.log("✅ Deleted old file:", fileId);
+          } catch (err: unknown) {
+            const error = err as { status?: number; message?: string };
+            if (error?.status === 404) {
+              console.warn("⚠️ File already deleted:", fileId);
+            } else {
+              console.error("❌ Failed to delete file:", fileId, error.message);
+            }
+          }
         }
-      } catch (err) {
-        console.error("Failed to delete old file:", err);
       }
 
-      const uploaded = await uploadFileToDrive(folderId, file);
-      fileData = {
-        fileId: uploaded.id,
-        link: uploaded.link,
-        originalName: uploaded.name,
-        mimeType: uploaded.mimeType,
-      };
+      console.log(`📤 Uploading ${files.length} new file(s)`);
+      for (const file of files) {
+        // ⚠️ Make sure file format is { name: string, buffer/base64: string, mimeType: string }
+        const uploaded = await uploadFileToDrive(folderId, file);
+        const previewUrl = uploaded.link.replace("/view?", "/preview?");
+        newImageUrls.push(previewUrl);
+        newFileIds.push(uploaded.id);
+        console.log("✅ Uploaded:", uploaded.id);
+      }
+    } else {
+      console.log("ℹ️ No new files to upload");
     }
 
     const updatedBike = await BikeDetails.findByIdAndUpdate(
@@ -188,13 +234,19 @@ export async function PUT(request: NextRequest) {
         description,
         features,
         specifications,
-        ...fileData,
+        images: newImageUrls.length ? newImageUrls : existingBike.images,
+        fileId: newFileIds.length ? newFileIds : existingBike.fileId,
       },
       { new: true }
     );
 
     return NextResponse.json({ message: "Bike updated successfully", success: true, updatedBike });
   } catch (error) {
-    return NextResponse.json({ error: error instanceof Error ? error.message : "Internal error" }, { status: 500 });
+    console.error("PUT bike error:", error);
+    return NextResponse.json(
+      { error: error instanceof Error ? error.message : "Internal error" },
+      { status: 500 }
+    );
   }
 }
+

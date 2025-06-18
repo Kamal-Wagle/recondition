@@ -38,9 +38,15 @@ interface Bike {
   registration?: string;
 }
 
-// Format Google Drive image URL
-const formatDriveUrl = (url: string): string =>
-  url.replace("/view?usp=drivesdk", "").replace("file/d/", "uc?id=");
+
+
+const formatDriveUrl = (url: string) => {
+  const match = url.match(/\/d\/(.+?)\//);
+  if (match && match[1]) {
+    return `https://drive.google.com/uc?export=view&id=${match[1]}`;
+  }
+  return url;
+};
 
 export default function BikeDetailPage( ) {
 

@@ -45,9 +45,17 @@ export default function BikeTable({
     return <p className="text-center text-gray-500">No bikes available.</p>;
   }
 
-  const getDrivePreviewUrl = (fileId: string) =>
-    `https://drive.google.com/file/d/${fileId}/preview`;
+  // const getDrivePreviewUrl = (fileId: string) =>
+  //   `https://drive.google.com/file/d/${fileId}/preview`;
 
+
+  const getDrivePreviewUrl = (url: string) => {
+    const match = url.match(/\/d\/(.+?)\//);
+    if (match && match[1]) {
+      return `https://drive.google.com/uc?export=view&id=${match[1]}`;
+    }
+    return url;
+  };
   return (
     <>
       <div className="border rounded-lg overflow-x-auto">

@@ -8,12 +8,33 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import $axios from '@/lib/axios.instance';
 import { toast } from 'react-hot-toast';
+import Image from 'next/image';
+
+type BikeType = {
+  name: string;
+  price: string;
+  year: string;
+  mileage: string;
+  brand: string;
+  type: string;
+  engine: string;
+  fuelType: string;
+  transmission: string;
+  color: string;
+  owners: string;
+  insurance: string;
+  registration: string;
+  description: string;
+  features: string[];
+  specifications: { 'Engine Displacement': string };
+  images: string[]; // URLs of images
+};
 
 export default function EditBikePage() {
   const router = useRouter();
   const { id } = useParams();
 
-  const [bike, setBike] = useState({
+  const [bike, setBike] = useState<BikeType>({
     name: '',
     price: '',
     year: '',
@@ -28,11 +49,12 @@ export default function EditBikePage() {
     insurance: '',
     registration: '',
     description: '',
-    features: [] as string[],
+    features: [],
     specifications: { 'Engine Displacement': '' },
+    images: [],
   });
 
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -66,28 +88,42 @@ export default function EditBikePage() {
   };
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) setSelectedFile(file);
+    if (!e.target.files) return;
+    const filesArray = Array.from(e.target.files);
+    setSelectedFiles(filesArray);
+  };
+
+  const convertFilesToBase64 = (files: File[]): Promise<{ name: string; content: string; mimeType: string }[]> => {
+    return Promise.all(
+      files.map(
+        (file) =>
+          new Promise<{ name: string; content: string; mimeType: string }>((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => {
+              if (typeof reader.result === 'string') {
+                const base64 = reader.result.split(',')[1]; // Remove data:<mime>;base64,
+                resolve({ name: file.name, content: base64, mimeType: file.type });
+              } else {
+                reject('FileReader result is not string');
+              }
+            };
+            reader.onerror = (error) => reject(error);
+          })
+      )
+    );
   };
 
   const handleUpdate = async () => {
     try {
-      let filePayload = null;
-
-      if (selectedFile) {
-        const arrayBuffer = await selectedFile.arrayBuffer();
-        const base64 = Buffer.from(arrayBuffer).toString('base64');
-
-        filePayload = {
-          name: selectedFile.name,
-          content: base64,
-          mimeType: selectedFile.type,
-        };
+      let filesPayload = null;
+      if (selectedFiles.length > 0) {
+        filesPayload = await convertFilesToBase64(selectedFiles);
       }
 
       await $axios.put(`/api/bike/${id}`, {
         ...bike,
-        file: filePayload,
+        files: filesPayload, // array of base64 encoded files
       });
 
       toast.success('Bike updated successfully!');
@@ -125,7 +161,7 @@ export default function EditBikePage() {
               <Label className="capitalize">{field}</Label>
               <Input
                 name={field}
-                value={bike[field as keyof typeof bike] as string}
+                value={bike[field as keyof BikeType] as string}
                 onChange={handleInputChange}
                 placeholder={`Enter ${field}`}
                 className="w-full mt-1"
@@ -155,15 +191,28 @@ export default function EditBikePage() {
           </div>
 
           <div>
-            <Label>Upload New Image (Optional)</Label>
-            <Input type="file" accept="image/*" onChange={handleFileChange} />
+            <Label>Upload New Images (Optional)</Label>
+            <Input type="file" accept="image/*" multiple onChange={handleFileChange} />
+          </div>
+
+          <div>
+            <Label>Current Images</Label>
+            <div className="flex space-x-4 overflow-x-auto">
+              {bike.images.map((url, i) => (
+                <Image
+                width={20}
+                height={20}
+                  key={i}
+                  src={url}
+                  alt={`Bike Image ${i + 1}`}
+                  className="h-20 w-20 object-cover rounded-md border"
+                />
+              ))}
+            </div>
           </div>
         </div>
 
-        <Button
-          onClick={handleUpdate}
-          className="mt-6 w-full bg-blue-600 text-white"
-        >
+        <Button onClick={handleUpdate} className="mt-6 w-full bg-blue-600 text-white">
           Update Bike
         </Button>
       </div>

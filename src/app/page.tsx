@@ -375,7 +375,7 @@ const formatDriveUrl = (url: string) => {
                           alt={`${bike.name} ${bike.year} - ${bike.condition} condition second-hand ${bike.type.toLowerCase()} for sale in Surkhet`}
                           width={400}
                           height={300}
-                          className="w-full h-48 sm:h-56 object-cover group-hover:scale-105 transition-transform duration-500"
+                          className="w-full h-80 sm:h-80 object-cover group-hover:scale-105 transition-transform duration-500"
                         />
                         <Badge className="absolute top-3 sm:top-4 right-3 sm:right-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold text-xs sm:text-sm">
                           {bike.type}

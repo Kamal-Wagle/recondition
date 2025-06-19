@@ -406,7 +406,7 @@ const { data, isLoading, isError } = useQuery<Album[], Error>({
                         alt={`${vehicle.name} ${vehicle.year} - ${vehicle.condition} condition second-hand ${vehicle.type?.toLowerCase() || 'vehicle'} for sale in Surkhet`}
                         width={400}
                         height={300}
-                        className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"
+                        className="w-full h-80 sm:h-80 object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                       <Badge className="absolute top-3 right-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold">
                         {vehicle.type || 'Vehicle'}

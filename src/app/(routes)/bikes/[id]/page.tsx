@@ -114,19 +114,20 @@ export default function BikeDetailPage( ) {
                         alt={bike.name}
                         width={600}
                         height={400}
-                        className="w-full h-80 object-cover rounded-t-lg"
+                        className="w-full  rounded-t-lg"
                       />
                     </div>
-                    {bike.images?.slice(1, 4).map((image: string, index: number) => (
-                      <Image
-                        key={index}
-                        src={formatDriveUrl(image)}
-                        alt={`${bike.name} ${index + 2}`}
-                        width={300}
-                        height={200}
-                        className="w-full h-32 object-cover"
-                      />
-                    ))}
+                    {bike.images?.slice(1, 6).map((image: string, index: number) => (
+  <Image
+    key={index}
+    src={formatDriveUrl(image)}
+    alt={`${bike.name} ${index + 2}`}
+    width={800}
+    height={600}
+    className="w-full rounded"
+/>
+))}
+
                   </div>
                 </CardContent>
               </Card>

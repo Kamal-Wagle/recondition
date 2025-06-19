@@ -25,6 +25,7 @@ interface Album {
   brand: string;
   engine: string;
   features?: string[];
+  registration:string;
 }
 
 const allVehicles = [
@@ -409,10 +410,10 @@ const { data, isLoading, isError } = useQuery<Album[], Error>({
                         className="w-full h-80 sm:h-80 object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                       <Badge className="absolute top-3 right-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold">
-                        {vehicle.type || 'Vehicle'}
+                        {vehicle.registration || 'Vehicle'}
                       </Badge>
                       <Badge className="absolute top-3 left-3 bg-gradient-to-r from-green-500 to-emerald-500 text-white font-bold">
-                        {vehicle.condition || 'New'}
+                      {vehicle.brand || 'N/A'}
                       </Badge>
                     </div>
                     <CardHeader className="pb-3">

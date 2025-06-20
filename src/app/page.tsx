@@ -250,7 +250,7 @@ const formatDriveUrl = (url: string) => {
                       asChild
                       variant="outline"
                       size="lg"
-                      className="w-full border-2 border-white text-white hover:bg-white hover:text-purple-900 font-semibold text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 backdrop-blur-sm"
+                      className="w-full border-2 border-white text-black hover:bg-white hover:text-purple-900 font-semibold text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 backdrop-blur-sm"
                     >
                       <Link href="/contact">
                         <Heart className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />

@@ -111,12 +111,12 @@ const stats = [
 ]
 
 const brands = [
-  { name: "Honda", logo: "/placeholder.svg?height=60&width=120" },
-  { name: "Yamaha", logo: "/placeholder.svg?height=60&width=120" },
-  { name: "TVS", logo: "/placeholder.svg?height=60&width=120" },
-  { name: "Bajaj", logo: "/placeholder.svg?height=60&width=120" },
-  { name: "Suzuki", logo: "/placeholder.svg?height=60&width=120" },
-  { name: "Hero", logo: "/placeholder.svg?height=60&width=120" },
+  { name: "Honda", logo: "/honda.jpg" },
+  { name: "Yamaha", logo: "/yamaha.png" },
+  { name: "TVS", logo: "/tvs.jpg" },
+  { name: "Bajaj", logo: "/bajaj.png" },
+  { name: "Suzuki", logo: "/suzuki.png" },
+  { name: "Hero", logo: "/hero.png" },
 ]
 
 export default function HomePage() {
@@ -522,27 +522,42 @@ const formatDriveUrl = (url: string) => {
               <p className="text-sm sm:text-base text-gray-600 max-w-2xl mx-auto">We deal with all major motorcycle and scooter brands</p>
             </motion.div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 sm:gap-8 items-center">
-              {brands.map((brand, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  whileHover={{ scale: 1.1 }}
-                  className="text-center"
-                >
-                  <Image
-                    src={brand.logo || "/placeholder.svg"}
-                    alt={`${brand.name} motorcycles and scooters available at Abc Recondition Surkhet`}
-                    width={120}
-                    height={60}
-                    className="mx-auto grayscale hover:grayscale-0 transition-all duration-300"
-                  />
-                </motion.div>
-              ))}
-            </div>
+            <div className="overflow-hidden w-full py-6">
+  <div className="flex w-max animate-[scroll_25s_linear_infinite] space-x-8">
+    {[...brands, ...brands].map((brand, index) => (
+      <motion.div
+        key={index}
+        initial={{ opacity: 0, scale: 0.8 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.6, delay: index * 0.1 }}
+        viewport={{ once: true }}
+        whileHover={{ scale: 1.1 }}
+        className="text-center flex-shrink-0 w-32 h-20 flex items-center justify-center"
+      >
+        <Image
+          src={brand.logo || "/placeholder.svg"}
+          alt={`${brand.name} motorcycles and scooters available at Abc Recondition Surkhet`}
+          width={120}
+          height={60}
+          className="mx-auto hover:grayscale-0 transition-all duration-300"
+        />
+      </motion.div>
+    ))}
+  </div>
+
+  {/* 👇 Marquee keyframes inline */}
+  <style jsx>{`
+    @keyframes scroll {
+      0% {
+        transform: translateX(0%);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+  `}</style>
+</div>
+
           </div>
         </section>
 
